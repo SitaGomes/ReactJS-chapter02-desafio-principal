@@ -117,7 +117,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       const {data: stock} = await api.get<Stock>(`stock/${productId}`)
 
-      if (amount >= stock.amount || amount <= 0) {
+      if (amount > stock.amount || amount <= 0) {
         toast.error('Quantidade solicitada fora de estoque');
         return
       }
@@ -133,8 +133,6 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       setCart(updatedCart)
       localStorage.setItem('@RocketShoes:cart', JSON.stringify(updatedCart))
-
-
       
       //TODO: Know if it's an incrementation or a decrementation
       //TODO: Check if the product exists in general
