@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   MdDelete,
   MdAddCircleOutline,
@@ -25,7 +24,6 @@ const Cart = (): JSX.Element => {
       return sumTotal + product.price * product.amount
     }, 0)
   )
-    
 
   function handleProductIncrement(product: Product) {
     const incrementAmountProp = {
