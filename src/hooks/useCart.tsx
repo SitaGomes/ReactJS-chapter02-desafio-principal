@@ -115,9 +115,24 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   }: UpdateProductAmount) => {
     try {
 
+      const {data: stock} = await api.get<Stock>(`stock/${productId}`)
 
+      if (amount >= stock.amount || amount <= 0) {
+        toast.error('Quantidade solicitada fora de estoque');
+        return
+      }
 
+      const updatedCart = cart.map(cartItem => {
 
+        if (productId === cartItem.id) {
+          cartItem.amount = amount
+        }
+
+        return cartItem
+      })
+
+      setCart(updatedCart)
+      localStorage.setItem('@RocketShoes:cart', JSON.stringify(updatedCart))
 
 
       
